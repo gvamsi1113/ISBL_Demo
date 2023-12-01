@@ -5,7 +5,7 @@ const cors = require("cors");
 
 app.use(express.json());
 const corsOptions = {
-  origin: "http://localhost:3000", // Replace with the origin of your React app
+  origin: "http://localhost:3001", // Replace with the origin of your React app
   credentials: true,
 };
 app.use(cors(corsOptions));

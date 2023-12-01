@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import axios from 'axios';
+import { Link, NavLink , useNavigate} from 'react-router-dom';
 import { SiShopware } from 'react-icons/si';
 import { MdOutlineCancel } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
-
+import globalUser, { updateUser } from '../pages/globalUser';
 import { links } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
 
@@ -11,7 +12,21 @@ const SidebarEmp = () => {
   const {activeMenu, setActiveMenu} = useStateContext();
   const activeLinkCss = 'flex items-center pt-9 pb-9 rounded-lg text-gray-400 text-md hover:bg-light-gray underline';
   const normalLinkCss = 'flex items-center pt-9 pb-9 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hovertext-black hover:bg-light-gray';
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    axios.post("http://localhost:3000/auth/logout", {}, { withCredentials: true })
+    .then(() => {
+      // Clear the access-token cookie on successful logout
+      updateUser({ id: 0, username: "", role: 0 });
+      document.cookie = "access-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      navigate("/login"); // Navigate to login page
 
+    })
+    .catch((error) => {
+      // Handle any errors during logout
+      console.error("Logout error:", error);
+    });
+  };
   return (
     <div className='flex-1 flex flex-col md:overflow-hidden overflow-auto md:hover:overflow-auto p-3 pb-8 justify-between bg-white rounded-3xl drop-shadow-xl max-h-screen'>
 
@@ -22,9 +37,12 @@ const SidebarEmp = () => {
               <SiShopware /> <span>Hi</span><span>Rakesh</span>
             </div>
             <span className='text-gray-400 pb-4 font-medium'> CL: 3</span>
-            <NavLink onClick={() => {}}>
-              <span className='font-extrabold text-gray-500'>Logout</span>
-            </NavLink>
+            <NavLink
+                onClick={handleLogout}
+                className="font-extrabold text-gray-500"
+              >
+                <span>Logout</span>
+              </NavLink>
           </div>
           
 

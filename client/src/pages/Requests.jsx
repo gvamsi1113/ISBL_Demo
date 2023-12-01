@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { GridComponent, ColumnsDirective, ColumnDirective, Resize, Sort, ContextMenu, Filter, Page, ExcelExport, PdfExport, Edit, Inject } from '@syncfusion/ej2-react-grids';
 import { requestsData, contextMenuItems, requestsGrid} from '../data/dummy';
-import { Header } from '../components';
+import { Header, Sidebar } from '../components';
+import globalUser, { updateUser } from './globalUser';
 
 const Requests = () => {
   // Initialize state with a status field for each row
@@ -43,6 +44,16 @@ const Requests = () => {
   });
 
   return (
+    <div className="flex gap-3 dark:bg-main-dark-bg">
+      {/* <div>User Role: {globalUser.role}</div>
+          <div className="w-72 flex max-h-screen p-3 pr-0 bg-gray-100 z-40">
+            <Sidebar />
+          </div> */}
+          
+          <div className="w-72 flex max-h-screen p-3 pr-0 bg-gray-100 z-40">
+              <Sidebar />
+          </div>
+          <div className="flex-grow">
     <div className='flex p-3 pl-0 h-screen'>
       <div className='flex flex-col rounded-3xl bg-white drop-shadow-xl overflow-auto'>
         <Header title="All Requests" />
@@ -64,6 +75,8 @@ const Requests = () => {
           </GridComponent>
         </div>
       </div>
+    </div>
+    </div>
     </div>
   )
 }

@@ -2,11 +2,15 @@ import React from 'react';
 import { GridComponent, ColumnsDirective, ColumnDirective, Resize, Sort, ContextMenu, Filter, Page, ExcelExport, PdfExport, Edit, Inject } from '@syncfusion/ej2-react-grids';
 
 import { recentFilesData, contextMenuItems, employeeViewFilesGrid } from '../data/dummy';
-import { Header } from '../components';
+import { Header, SidebarEmp } from '../components';
+import globalUser, { updateUser } from './globalUser';
 
 const EmployeeView = () => {
   return (
-    <div className='flex p-3 pl-0 h-screen'>
+    <div className='flex p-3 pl-0 h-screen gap-3'>
+      <div>
+        {globalUser.role === 1 && (<SidebarEmp />)}
+      </div>
       <div className='flex flex-col rounded-3xl bg-white drop-shadow-xl overflow-auto'>
         <Header title="All Files" />
         <div className="bg-white overflow-clip">

@@ -2,11 +2,15 @@ import React from 'react';
 import { GridComponent, ColumnsDirective, ColumnDirective, Resize, Sort, ContextMenu, Filter, Page, ExcelExport, PdfExport, Edit, Inject } from '@syncfusion/ej2-react-grids';
 
 import { employeesData, contextMenuItems, employeesGrid } from '../data/dummy';
-import { Header } from '../components';
+import { Header, Sidebar } from '../components';
 
 const Employees = () => {
   return (
     <div className='flex p-3 pl-0 h-screen'>
+      
+      <div className="w-72 flex max-h-screen p-3 pr-0 bg-gray-100 z-40">
+              <Sidebar />
+          </div>
       <div className='flex flex-col rounded-3xl bg-white drop-shadow-xl overflow-auto'>
         <Header title="Employees" />
         <div className="bg-white overflow-auto">

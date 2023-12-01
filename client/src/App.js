@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { Navbar, Sidebar, SidebarEmp, Footer, ThemeSettings } from './components';
-import { Employees, Files, Overview, Requests, EmployeeView, Login } from './pages';
+import { Employees, Files, Overview, Requests, EmployeeView, Login, Registration, Dashboard } from './pages';
+import globalUser, { updateUser } from './pages/globalUser';
 
 import { useStateContext } from "./contexts/ContextProvider";
 
@@ -14,16 +15,22 @@ const App = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen max-w-full">
+    {/* <div>User Role: {globalUser.role}</div> */}
       <BrowserRouter>
         <div className="flex gap-3 dark:bg-main-dark-bg">
-          <div className="w-72 flex max-h-screen p-3 pr-0 bg-gray-100 z-40">
-            <Sidebar />
-          </div>
+
           <div className="flex-grow">
             <Routes>
-              <Route path="/" element={<Overview />} />
+              <Route path="/" element={<Login />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/files" element={<Files />}/>
+              <Route path="/registration" element={<Registration />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/dashboard/files" element={<Files />} />
+              <Route path="/dashboard/overview" element={<Overview />} />
+              <Route path="/dashboard/allfiles" element={<EmployeeView />} />
+              <Route path="/dashboard/requests" element={<Requests />} />
+              <Route path="/dashboard/employees" element={<Employees />} />
+              <Route path="files" element={<Files />} />
               <Route path="/overview" element={<Overview />} />
               <Route path="/allfiles" element={<EmployeeView />} />
               <Route path="/requests" element={<Requests />} />
